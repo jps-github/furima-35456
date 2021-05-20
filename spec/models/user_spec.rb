@@ -22,6 +22,20 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Email can't be blank")
     end
 
+    it "既に登録されているemailは登録できない" do
+      @user.save
+      @user2 = FactoryBot.build(:user)
+      @user2.email = @user.email
+      @user2.valid?
+      expect(@user2.errors.full_messages).to include("Email has already been taken")
+    end
+
+    it "emailに@がなければ登録できない" do
+      @user.email = "aaa"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+
     it "passwordが6文字以上で英数字混在であれば登録できる" do
       @user.password = "000aaa"
       @user.password_confirmation = "000aaa"
@@ -57,6 +71,13 @@ RSpec.describe User, type: :model do
 
     it "password_confirmationが空では登録できない" do
       @user.password_confirmation = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+
+    it "passwordとpassword_confirmationが一致していなければ登録できない" do
+      @user.password = "aaaaaa"
+      @user.password_confirmation = "bbbbbb"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
