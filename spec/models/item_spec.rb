@@ -67,13 +67,28 @@ RSpec.describe Item, type: :model do
         error_test("Price can't be blank")
       end
 
-      it "priceが範囲（¥300-¥9,999,999）の外であれば登録できない" do
+      it "priceが¥299以下であれば登録できない" do
         @item.price = 100
+        error_test("Price is out of setting range")
+      end
+
+      it "priceが¥10,000,000以上であれば登録できない  " do
+        @item.price = 100000000
         error_test("Price is out of setting range")
       end
 
       it "priceが半角数字でなければ登録できない" do
         @item.price = "３００"
+        error_test("Price is invalid. Input half-width characters")
+      end
+
+      it "priceが半角英数混合であれば登録できない" do
+        @item.price = "123abc"
+        error_test("Price is invalid. Input half-width characters")
+      end
+
+      it "priceが半角英語だけでは登録できない" do
+        @item.price = "abc"
         error_test("Price is invalid. Input half-width characters")
       end
 
