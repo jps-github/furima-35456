@@ -5,9 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items
-  
-  with_options presence: true do
 
+  with_options presence: true do
     validates :nickname
     validates :birthday
 
@@ -20,8 +19,8 @@ class User < ApplicationRecord
       validates :last_name_katakana
       validates :first_name_katakana
     end
-    
   end
 
-  validates :password, format:{ with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/, message: 'is invalid. Include both letters and numbers' }  
+  validates :password,
+            format: { with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}/, message: 'is invalid. Include both letters and numbers' }
 end
