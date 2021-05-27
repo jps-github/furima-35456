@@ -8,6 +8,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
+  has_one :purchase
 
   with_options numericality: { other_than: 0, message: "can't be blank" } do
     validates :category_id
