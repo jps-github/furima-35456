@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!, :find_item, :onsale_check, :except_seller
+  before_action :authenticate_user!, :find_item, :back_to_top
 
   def index
     @purchase_delivery = PurchaseDelivery.new
@@ -28,14 +28,8 @@ class PurchasesController < ApplicationController
     @item = Item.includes(:purchase).find(params[:item_id])
   end
 
-  def onsale_check
-    if @item.purchase
-      redirect_to root_path
-    end
-  end
-
-  def except_seller
-    if current_user.id == @item.user_id
+  def back_to_top
+    if @item.purchase != nil || current_user.id == @item.user_id
       redirect_to root_path
     end
   end

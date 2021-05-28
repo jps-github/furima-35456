@@ -53,7 +53,7 @@ RSpec.describe PurchaseDelivery, type: :model do
       end
 
       it 'prefecture_idが0だと購入できない' do
-        @purchase_delivery.prefecture_id = "0"
+        @purchase_delivery.prefecture_id = 0
         error_test("Prefecture can't be blank")
       end
 
@@ -74,6 +74,11 @@ RSpec.describe PurchaseDelivery, type: :model do
 
       it 'phone_numberが10ケタより少ないと購入できない' do
         @purchase_delivery.phone_number = "123456789"
+        error_test("Phone number is too short")
+      end
+
+      it 'phone_numberが11ケタより多いと購入できない' do
+        @purchase_delivery.phone_number = "123456789012"
         error_test("Phone number is too short")
       end
 

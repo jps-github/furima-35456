@@ -1,8 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
-  before_action :only_seller, only: [:edit, :update, :destroy]
-  before_action :onsale_check, only: [:edit, :update, :destroy]
+  before_action :back_to_top, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.order('created_at DESC').includes(:purchase)
@@ -54,14 +53,8 @@ class ItemsController < ApplicationController
     @item = Item.includes(:purchase).find(params[:id])
   end
 
-  def only_seller
-    unless current_user.id == @item.user_id
-      redirect_to root_path
-    end
-  end
-
-  def onsale_check
-    if @item.purchase
+  def back_to_top
+    if @item.purchase != nil || current_user.id != @item.user_id
       redirect_to root_path
     end
   end
