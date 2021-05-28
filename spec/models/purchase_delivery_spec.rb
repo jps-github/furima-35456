@@ -42,7 +42,7 @@ RSpec.describe PurchaseDelivery, type: :model do
         error_test("Post code is invalid. Enter it as follows (e.g. 123-4567)")
       end
 
-      it 'post_codeの「-」の直後が半角数字３ケタでないと購入できない' do
+      it 'post_codeの「-」の直前が半角数字３ケタでないと購入できない' do
         @purchase_delivery.post_code = "12-4567"
         error_test("Post code is invalid. Enter it as follows (e.g. 123-4567)")
       end
