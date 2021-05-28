@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, execpt: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
-  before_action :user_confirmation, only: [:edit, :update, :destroy]
+  before_action :back_to_top, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.order('created_at DESC')
+    @items = Item.order('created_at DESC').includes(:purchase)
   end
 
   def new
@@ -41,6 +41,7 @@ class ItemsController < ApplicationController
     redirect_to action: :index
   end
 
+
   private
 
   def item_params
@@ -49,11 +50,11 @@ class ItemsController < ApplicationController
   end
 
   def find_item
-    @item = Item.find(params[:id])
+    @item = Item.includes(:purchase).find(params[:id])
   end
 
-  def user_confirmation
-    unless current_user.id == @item.user_id
+  def back_to_top
+    if @item.purchase != nil || current_user.id != @item.user_id
       redirect_to root_path
     end
   end
