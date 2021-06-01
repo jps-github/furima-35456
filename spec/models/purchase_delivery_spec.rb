@@ -92,6 +92,16 @@ RSpec.describe PurchaseDelivery, type: :model do
         error_test("Phone number is invalid. Input only number")
       end
 
+      it 'user_idがないと購入できない' do
+        @purchase_delivery.user_id = ''
+        error_test("User can't be blank")
+      end
+
+      it 'item_idがないと購入できない' do
+        @purchase_delivery.item_id = ''
+        error_test("Item can't be blank")
+      end
+
     end
     
   end
