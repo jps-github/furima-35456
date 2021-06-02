@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_day
 
   belongs_to :user
-  has_one_attached :image
+  has_many_attached :images
   has_one :purchase
 
   with_options numericality: { other_than: 0, message: "can't be blank" } do
@@ -19,7 +19,7 @@ class Item < ApplicationRecord
   end
 
   with_options presence: true do
-    validates :image
+    validates :images
     validates :name
     validates :description
     validates :price
