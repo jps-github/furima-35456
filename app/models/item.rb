@@ -9,6 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many_attached :images
   has_one :purchase
+  has_many :comments
 
   with_options numericality: { other_than: 0, message: "を選択してください" } do
     validates :category_id
