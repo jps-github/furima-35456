@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @comments = Comment.all
+    @comments = @item.comments
     @comment = Comment.new
   end
 
