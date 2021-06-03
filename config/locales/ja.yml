@@ -1,0 +1,32 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        last_name: 姓
+        first_name: 名
+        last_name_katakana: セイ
+        first_name_katakana: メイ
+        birthday: 生年月日
+      item:
+        images: 画像
+        name: 商品名
+        description: 商品説明
+        category_id: カテゴリー
+        condition_id: 商品状態
+        delivery_charge_id: 送料負担
+        prefecture_id: 発送元
+        delivery_day_id: 発送日数
+        price: 価格
+  activemodel:
+    attributes:
+      purchase_delivery:
+        token: クレジットカード情報
+        post_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address: 丁目・番地・号
+        building_name: 建物名
+        phone_number: 電話番号
+        user_id: 購入する会員
+        item_id: 購入する商品
