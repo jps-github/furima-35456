@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   has_many_attached :images
   has_one :purchase
 
-  with_options numericality: { other_than: 0, message: "can't be blank" } do
+  with_options numericality: { other_than: 0, message: "を選択してください" } do
     validates :category_id
     validates :condition_id
     validates :delivery_charge_id
@@ -24,6 +24,6 @@ class Item < ApplicationRecord
     validates :description
     validates :price
   end
-  validates :price, inclusion: { in: 300..9_999_999, message: 'is out of setting range' }
-  validates :price, numericality: { message: 'is invalid. Input half-width characters' }
+  validates :price, inclusion: { in: 300..9_999_999, message: 'は300円〜9,999,999円の範囲で入力してください' }
+  validates :price, numericality: { message: 'は無効です。半角数字で入力してください' }
 end

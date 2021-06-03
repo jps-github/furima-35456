@@ -19,73 +19,73 @@ RSpec.describe Item, type: :model do
 
     context '出品できない場合' do
       it 'imageが添付されなければ登録できない' do
-        @item.image = nil
-        error_test("Image can't be blank")
+        @item.images = nil
+        error_test("画像を入力してください")
       end
 
       it 'nameが未記入であれば登録できない' do
         @item.name = ''
-        error_test("Name can't be blank")
+        error_test("商品名を入力してください")
       end
 
       it 'descriptionが未記入であれば登録できない' do
         @item.description = ''
-        error_test("Description can't be blank")
+        error_test("商品説明を入力してください")
       end
 
       it 'categoryが未選択であれば登録できない' do
         @item.category_id = 0
-        error_test("Category can't be blank")
+        error_test("カテゴリーを選択してください")
       end
 
       it 'conditionが未選択であれば登録できない' do
         @item.condition_id = 0
-        error_test("Condition can't be blank")
+        error_test("商品状態を選択してください")
       end
 
       it 'delivery_chargeが未選択であれば登録できない' do
         @item.delivery_charge_id = 0
-        error_test("Delivery charge can't be blank")
+        error_test("送料負担を選択してください")
       end
 
       it 'prefectureが未選択であれば登録できない' do
         @item.prefecture_id = 0
-        error_test("Prefecture can't be blank")
+        error_test("発送元を選択してください")
       end
 
       it 'delivery_dayが未選択であれば登録できない' do
         @item.delivery_day_id = 0
-        error_test("Delivery day can't be blank")
+        error_test("発送日数を選択してください")
       end
 
       it 'priceが未記入であれば登録できない' do
         @item.price = ''
-        error_test("Price can't be blank")
+        error_test("価格を入力してください")
       end
 
       it 'priceが¥299以下であれば登録できない' do
         @item.price = 100
-        error_test('Price is out of setting range')
+        error_test('価格は300円〜9,999,999円の範囲で入力してください')
       end
 
       it 'priceが¥10,000,000以上であれば登録できない  ' do
         @item.price = 100_000_000
-        error_test('Price is out of setting range')
+        error_test('価格は300円〜9,999,999円の範囲で入力してください')
       end
 
       it 'priceが半角数字でなければ登録できない' do
         @item.price = '３００'
-        error_test('Price is invalid. Input half-width characters')
+        error_test('価格は無効です。半角数字で入力してください')
       end
 
       it 'priceが半角英数混合であれば登録できない' do
         @item.price = '123abc'
-        error_test('Price is invalid. Input half-width characters')
+        error_test('価格は無効です。半角数字で入力してください')
       end
 
       it 'priceが半角英語だけでは登録できない' do
         @item.price = 'abc'
-        error_test('Price is invalid. Input half-width characters')
+        error_test('価格は無効です。半角数字で入力してください')
       end
     end
   end
