@@ -24,6 +24,10 @@ class ItemsController < ApplicationController
   def show
     @comments = @item.comments
     @comment = Comment.new
+    gon.current_user = current_user.nickname
+    if current_user.id == @item.user_id
+      gon.seller = true
+    end
   end
 
   def edit

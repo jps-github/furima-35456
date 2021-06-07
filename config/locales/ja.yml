@@ -30,3 +30,6 @@ ja:
         phone_number: 電話番号
         user_id: 購入する会員
         item_id: 購入する商品
+  time:
+    formats:
+      default: "%Y年%m月%d日 %H時%M分"
