@@ -82,10 +82,12 @@
   <%# /商品の概要 %>
 
     <div class="comment-box">
-    
-      <% if user_signed_in? && current_user.id != @item.user_id %>
-        <%= form_with model: @comment, url: item_comments_path(@item) do |f| %>
-          <%= f.text_field :comment, id: "comment-text" %>
+      <h2 class="name">
+        コメント
+      </h2>
+      <% if @item.purchase == nil %>
+        <%= form_with model: [@item, @comment] do |f| %>
+          <%= f.text_field :comment, id: "comment-input" %>
           <p class="comment-warn">
           相手のことを考え丁寧なコメントを心がけましょう。
           <br>
@@ -96,8 +98,35 @@
       <% end %>
 
       <div id='comments'>
+        <div id="new-comment">
+          <p id="new-comment-text"></p>
+          <div id="new-comment-info">
+            <p id="new-comment-name"></p>
+            <p id="new-comment-date"></p>
+          </div>
+        </div>
         <% @comments.reverse_each do |comment| %>
-          <p><%= comment.comment %></p>
+          <% if comment.user_id == @item.user_id %>
+            <div class="comment-seller">
+          <% else %>
+            <div class="comment">
+          <% end %>
+              <p class="comment-text"><%= comment.comment %></p>
+              <% if comment.user_id == @item.user_id %>
+                <div class="comment-info-seller">
+              <% else %>
+                <div class="comment-info">
+              <% end %>
+                  <% if current_user.id == comment.user_id %>
+                    <p>from <%= current_user.nickname%>(あなた)</p>
+                  <% elsif @item.user_id == comment.user_id %>
+                    <p>from 出品者</p>
+                  <% else%>
+                    <p>from <%= User.find(comment.user_id).nickname %></p>
+                  <% end %>
+                  <p><%= l comment.created_at %></p>
+              </div>
+            </div>
         <% end %>
       </div>
 
@@ -108,7 +137,7 @@
         ＜ 前の商品
       </a>
       <a href="#" class="change-item-btn">
-        後ろの商品 ＞
+        次の商品 ＞
       </a>
     </div>
 

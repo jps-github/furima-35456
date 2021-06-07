@@ -5,9 +5,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     if @comment.valid?
       @comment.save
-      if @comment.save
-        ActionCable.server.broadcast 'comment_channel', content: @comment
-      end
+      ActionCable.server.broadcast 'comment_channel', content: @comment
     else
       redirect_to item_path(params[:item_id])
     end
@@ -20,9 +18,9 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:comment).merge(user_id: current_user.id, item_id: params[:item_id])
   end
 
-  def redirect_to_show
-    if user_signed_in? && current_user.id == Item.find(params[:item_id]).user_id
-      redirect_to item_path(params[:item_id])
+  def redirect_to_show 
+    if Item.find(params[:item_id]).purchase != nil
+      redirect_to item_path(params[:item_id])  
     end
   end
 
