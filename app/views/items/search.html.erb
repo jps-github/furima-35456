@@ -1,0 +1,85 @@
+<%= render "shared/header" %>
+<h1>商品検索</h1>
+<%= search_form_for @p, url: search_items_path do |f| %>
+  <%= link_to '検索条件をクリア', request.path %>
+  <br>
+
+  <%= f.label :name_or_description_cont, 'キーワード' %>
+  <%= f.search_field :name_or_description_cont %>
+  <br>
+
+  <%= f.label :category_id_eq, "カテゴリー" %>
+  <%= f.collection_select(:category_id_eq, Category.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
+  <br>
+
+  <%= f.label :condition_id_eq, "商品の状態" %>
+  <%= f.collection_select(:condition_id_eq, Condition.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
+  <br>
+
+  <%= f.label :prefecture_id_eq, "発送地域" %>
+  <%= f.collection_select(:prefecture_id_eq, Prefecture.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
+  <br>
+  
+  <%= f.label :delivery_charge_id_eq, '配送料' %>
+  <%= f.radio_button :delivery_charge_id_eq, '' %>
+  指定なし
+  <%= f.radio_button :delivery_charge_id_eq, '1' %>
+  送料込み（出品者負担）
+  <%= f.radio_button :delivery_charge_id_eq, '2' %>
+  着払い（購入者負担）
+  <br>
+  <%= f.label :delivery_day_id_eq, '配達日数' %>
+  <%= f.radio_button :delivery_day_id_eq, '' %>
+  指定なし
+  <%= f.radio_button :delivery_day_id_eq, '1' %>
+  1~2日
+  <%= f.radio_button :delivery_day_id_eq, '2' %>
+  2~3日
+  <%= f.radio_button :delivery_day_id_eq, '3' %>
+  4~7日
+  <br>
+
+  <%= f.label :price_gteq, "最低価格" %>
+  <%= f.search_field :price_gteq %>
+  <%= f.label :price_lteq, "最高価格" %>
+  <%= f.search_field :price_lteq %>
+  <br>
+
+  <%= f.submit '検索' %>
+<% end %>
+
+<h1>検索結果</h1>
+<% if @results.length !=0 %>
+  <% @results.each do |result| %>
+    <li class='list'>
+          <%= link_to item_path(result.id) do %>
+          <div class='item-img-content'>
+            <%= image_tag result.images[0], class:'item-img' %>
+
+            <% if result.purchase != nil %>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+            <% end %>
+
+          </div>
+          <div class='item-info'>
+            <h3 class='item-name'>
+              <%= result.name %>
+            </h3>
+            <div class='item-price'>
+              <span><%= result.price %>円<br><%= result.delivery_charge.name %></span>
+              <div class='star-btn'>
+                <%= image_tag "star.png", class:"star-icon" %>
+                <span class='star-count'>0</span>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        </li>
+  <% end %>
+<% else %>
+  該当する商品はありません
+<% end %>
+<br>
+<%= render "shared/footer" %>
