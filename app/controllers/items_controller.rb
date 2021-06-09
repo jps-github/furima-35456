@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
   before_action :back_to_top, only: [:edit, :update, :destroy]
+  before_action :search_product
 
   def index
     @items = Item.order('created_at DESC').includes(:purchase)
@@ -24,8 +25,9 @@ class ItemsController < ApplicationController
   def show
     @comments = @item.comments
     @comment = Comment.new
-    gon.current_user = current_user.nickname
-    if current_user.id == @item.user_id
+
+    if user_signed_in? && (current_user.id == @item.user_id)
+      gon.current_user = current_user.nickname
       gon.seller = true
     end
   end
@@ -47,6 +49,9 @@ class ItemsController < ApplicationController
     redirect_to action: :index
   end
 
+  def search
+    @results = @p.result
+  end
 
   private
 
@@ -63,5 +68,9 @@ class ItemsController < ApplicationController
     if @item.purchase != nil || current_user.id != @item.user_id
       redirect_to root_path
     end
+  end
+
+  def search_product
+    @p = Item.ransack(params[:q])
   end
 end
