@@ -1,12 +1,24 @@
-#search-forms{
-  border: solid 1px black;
-  width: 75%;
+.search{
+  background-color: #f5f5f5;
+}
+
+.name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.search-forms{
+  width: 90%;
   margin: 0 auto;
   border-radius: 10px;
+  background-color: white;
+  padding: 30px 0;
+  margin-bottom: 50px;
 }
 
 .search-boxes{
-  width: 75%;
+  width: 65%;
   height: 50px;
   text-align: center;
   margin: 20px auto;
@@ -81,23 +93,19 @@
 
 .btn{
   text-align: center;
-  margin: 20px 0 50px 0;
 }
 
 /* 商品一覧 */
 
-.name {
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
-  margin: 20px 0;
-}
 .search-results {
   background-color: #FFF;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10vh 0;
+  padding: 30px 0;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 10px;
 }
 
 .item-lists {
@@ -105,6 +113,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .item-lists>.list {

@@ -82,10 +82,8 @@
   <%# /商品の概要 %>
 
     <div class="comment-box">
-      <h2 class="name">
-        コメント
-      </h2>
-      <% if @item.purchase == nil %>
+      <h2 class="name">コメント</h2>
+      <% if @item.purchase == nil && user_signed_in? %>
         <%= form_with model: [@item, @comment] do |f| %>
           <%= f.text_field :comment, id: "comment-input" %>
           <p class="comment-warn">
@@ -117,7 +115,7 @@
               <% else %>
                 <div class="comment-info">
               <% end %>
-                  <% if current_user.id == comment.user_id %>
+                  <% if user_signed_in? && (current_user.id == comment.user_id) %>
                     <p>from <%= current_user.nickname%>(あなた)</p>
                   <% elsif @item.user_id == comment.user_id %>
                     <p>from 出品者</p>
@@ -133,12 +131,14 @@
     </div>
 
     <div class="links">
-      <a href="#" class="change-item-btn">
-        ＜ 前の商品
-      </a>
-      <a href="#" class="change-item-btn">
-        次の商品 ＞
-      </a>
+      <% if 1 < @item.id  %>
+        <%= link_to '＜ 前の商品', item_path(@item.id - 1), class: "change-item-btn" %>
+      <% else %>
+        <div class="change-item-btn"></div>
+      <% end %>
+      <% if @item.id < @items.length %>
+        <%= link_to '次の商品 ＞', item_path(@item.id + 1), class: "change-item-btn" %>
+      <% end %>
     </div>
 
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
