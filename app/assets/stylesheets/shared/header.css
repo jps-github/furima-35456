@@ -51,30 +51,32 @@
   justify-content: space-between;
   flex-wrap: wrap;
   width: 100%;
-  padding: 1vh 0;
+  padding: 2vh 0 0 0;
 }
 
 .lists-left {
   display: flex;
   min-width: 200px;
-
 }
 
 .category-list {
   text-decoration: none;
   margin-right: 3vw;
-  color: #333333;
+  color: #3CCACE;
+  font-weight: bold;
 }
 
 .brand-list {
   text-decoration: none;
   margin-right: 3vw;
-  color: #333333;
+  color: #3CCACE;
+  font-weight: bold;
 }
 
 .search-list {
   text-decoration: none;
-  color: #333333;
+  color: #3CCACE;
+  font-weight: bold;
 }
 
 .lists-right {
@@ -87,24 +89,26 @@
 .user-nickname {
   text-decoration: none;
   margin-right: 3vw;
-  color: #333333;
+  color: #3CCACE;
   font-weight: bold;
 }
 
 
 .logout {
   text-decoration: none;
-  color: #333333;
+  color: #3CCACE;
+  font-weight: bold;
 }
 
 .login {
   text-decoration: none;
-  line-height: 32px;
   margin-right: 3vw;
-  color: #333333;
+  color: #3CCACE;
+  font-weight: bold;
 }
 
 .sign-up {
   text-decoration: none;
-  color: #333333;
+  color: #3CCACE;
+  font-weight: bold;
 }
