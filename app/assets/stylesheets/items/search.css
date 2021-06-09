@@ -1,0 +1,175 @@
+#search-forms{
+  border: solid 1px black;
+  width: 75%;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.search-boxes{
+  width: 75%;
+  height: 50px;
+  text-align: center;
+  margin: 20px auto;
+  display: flex;
+}
+
+.search-boxes > label{
+  font-size: 20px;
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 20px;
+  color: #3CCACE;
+  font-weight: bold;
+}
+
+.selects{
+  position: relative;
+  left: 50px;
+}
+
+.selects > select{
+  width: 200px;
+  height: 30px;
+  margin: 10px 0;
+}
+
+.selects > span{
+  font-size: 20px;
+  margin: 0 30px 0 10px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.keyword-search{
+  margin-top: 50px
+}
+
+.keyword-select{
+  width: 430px;
+  height: 50px;
+}
+
+.delivery-day-select > span{
+  font-size: 20px;
+  height: 50px;
+  line-height: 50px;
+}
+
+.price-select > input{
+  width: 200px;
+  height: 40px;
+  margin: 5px 0;
+}
+
+.clear{
+  text-align: right;
+  margin-right: 60px
+}
+
+.search-btn {
+  line-height: 48px;
+  background-color: #3CCACE;
+  border: 1px solid #3CCACE;
+  color: #fff;
+  width: 50%;
+  min-width: 150px;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 100px;
+}
+
+.btn{
+  text-align: center;
+  margin: 20px 0 50px 0;
+}
+
+/* 商品一覧 */
+
+.name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  margin: 20px 0;
+}
+.search-results {
+  background-color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10vh 0;
+}
+
+.item-lists {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.item-lists>.list {
+  width: 37vh;
+  padding: 1vw;
+  background-color: #FFF;
+  list-style: none;
+}
+
+
+.item-img-content {
+  position: relative;
+}
+
+.item-img {
+  width: 33vh;
+  height: 33vh;
+}
+
+.sold-out {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  text-align: center;
+  background-color: crimson;
+  transform: skewY(-10deg);
+}
+
+.sold-out>span {
+  color: #FFF;
+  font-size: 45px;
+  font: bold;
+}
+
+
+.item-info {
+  background-color: #FFF;
+  color: black;
+  padding: 1vw;
+}
+
+.item-name {
+  font-size: 2.5vh;
+}
+
+.item-price {
+  font-size: 1.5vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.star-btn {
+  display: flex;
+  align-items: center;
+}
+
+.star-icon {
+  height: 2vh;
+  width: 2vh;
+  margin-right: 0.5vw;
+}
+
+.star-count {
+  font-size: 2vh;
+}
+
+/* //商品一覧 */

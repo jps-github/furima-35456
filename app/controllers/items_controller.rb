@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :search]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
   before_action :back_to_top, only: [:edit, :update, :destroy]
-  before_action :search_product, only: [:index, :search]
+  before_action :search_product
 
   def index
     @items = Item.order('created_at DESC').includes(:purchase)

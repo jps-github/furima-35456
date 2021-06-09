@@ -1,57 +1,75 @@
 <%= render "shared/header" %>
-<h1>商品検索</h1>
-<%= search_form_for @p, url: search_items_path do |f| %>
-  <%= link_to '検索条件をクリア', request.path %>
-  <br>
+<h1 class="name">商品検索</h1>
+<%= search_form_for @p, url: search_items_path, id: "search-forms" do |f| %>
 
-  <%= f.label :name_or_description_cont, 'キーワード' %>
-  <%= f.search_field :name_or_description_cont %>
-  <br>
+  <div class="keyword-search search-boxes">
+    <%= f.label :name_or_description_cont, 'キーワード' %>
+    <div class="selects">
+      <%= f.search_field :name_or_description_cont, class: "keyword-select" %>
+    </div>
+  </div>
 
-  <%= f.label :category_id_eq, "カテゴリー" %>
-  <%= f.collection_select(:category_id_eq, Category.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
-  <br>
+  <div class="search-boxes">
+    <%= f.label :category_id_eq, "カテゴリー" %>
+    <div class="category-select selects">
+      <%= f.collection_select(:category_id_eq, Category.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
+    </div>
+  </div>
 
-  <%= f.label :condition_id_eq, "商品の状態" %>
-  <%= f.collection_select(:condition_id_eq, Condition.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
-  <br>
+  <div class="search-boxes">
+    <%= f.label :condition_id_eq, "商品の状態" %>
+    <div class="condition-select selects">
+      <%= f.collection_select(:condition_id_eq, Condition.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
+    </div>
+  </div>
 
-  <%= f.label :prefecture_id_eq, "発送地域" %>
-  <%= f.collection_select(:prefecture_id_eq, Prefecture.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
-  <br>
+  <div class="search-boxes">
+    <%= f.label :prefecture_id_eq, "発送地域" %>
+    <div class="prefecture-select selects">
+      <%= f.collection_select(:prefecture_id_eq, Prefecture.where.not(id: 0), :id, :name, include_blank: '指定なし') %>
+    </div>
+  </div>
+
+  <div class="search-boxes">
+    <%= f.label :delivery_charge_id_eq, '配送料' %>
+    <div class="delivery-charge-select selects">
+      <%= f.radio_button :delivery_charge_id_eq, '' %><span>指定なし</span>
+      <%= f.radio_button :delivery_charge_id_eq, '1' %><span>送料込み(出品者負担)</span>
+      <%= f.radio_button :delivery_charge_id_eq, '2' %><span>着払い(購入者負担)</span>
+    </div>
+  </div>
   
-  <%= f.label :delivery_charge_id_eq, '配送料' %>
-  <%= f.radio_button :delivery_charge_id_eq, '' %>
-  指定なし
-  <%= f.radio_button :delivery_charge_id_eq, '1' %>
-  送料込み（出品者負担）
-  <%= f.radio_button :delivery_charge_id_eq, '2' %>
-  着払い（購入者負担）
-  <br>
-  <%= f.label :delivery_day_id_eq, '配達日数' %>
-  <%= f.radio_button :delivery_day_id_eq, '' %>
-  指定なし
-  <%= f.radio_button :delivery_day_id_eq, '1' %>
-  1~2日
-  <%= f.radio_button :delivery_day_id_eq, '2' %>
-  2~3日
-  <%= f.radio_button :delivery_day_id_eq, '3' %>
-  4~7日
-  <br>
+  <div class="search-boxes">
+    <%= f.label :delivery_day_id_eq, '配達日数' %>
+    <div class="delivery-day-select selects">
+      <%= f.radio_button :delivery_day_id_eq, '' %><span>指定なし</span>
+      <%= f.radio_button :delivery_day_id_eq, '1' %><span>1~2日</span>
+      <%= f.radio_button :delivery_day_id_eq, '2' %><span>2~3日</span>
+      <%= f.radio_button :delivery_day_id_eq, '3' %><span>4~7日</span>
+    </div>
+  </div>
 
-  <%= f.label :price_gteq, "最低価格" %>
-  <%= f.search_field :price_gteq %>
-  <%= f.label :price_lteq, "最高価格" %>
-  <%= f.search_field :price_lteq %>
-  <br>
+  <div class="search-boxes">
+    <%= f.label :price_gteq, "商品価格" %>
+    <div class="price-select selects">
+      <%= f.search_field :price_gteq %> 〜 <%= f.search_field :price_lteq %>
+    </div>
+  </div>
 
-  <%= f.submit '検索' %>
+  <div class="clear">
+    <%= link_to '検索条件をクリア', request.path %>
+  </div>
+
+  <div class="btn"><%= f.submit '検索', class: "search-btn" %></div>
 <% end %>
 
-<h1>検索結果</h1>
-<% if @results.length !=0 %>
-  <% @results.each do |result| %>
-    <li class='list'>
+
+<div class="search-results">
+  <h1 class="name">検索結果</h1>
+  <% if @results.length !=0 %>
+    <div class="item-lists">
+      <% @results.each do |result| %>
+        <li class='list'>
           <%= link_to item_path(result.id) do %>
           <div class='item-img-content'>
             <%= image_tag result.images[0], class:'item-img' %>
@@ -77,7 +95,9 @@
           </div>
           <% end %>
         </li>
-  <% end %>
+      <% end %>
+    </div>
+  </div>
 <% else %>
   該当する商品はありません
 <% end %>
